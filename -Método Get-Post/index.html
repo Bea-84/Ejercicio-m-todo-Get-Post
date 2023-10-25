@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso servidor</title>
+    <!--Al introducir estilos prevalece el orden en el que introduzcas los links-->
+    <!--Link estilos-->
+    <link rel="stylesheet" href="estilo.css"> 
+    <!-- Link compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Libreria compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body style="background-color: #fea;">
+  
+<!--METODO GET-->
+
+    <form method="get" action="">
+        Introduce tu nombre:
+        <input type="text" name="nombre" placeholder="tu nombre" required>
+        <br>
+        <!--Placeholder aparece en el input para ayudarte a saber que debes poner-->
+        Introduce tu ciudad:
+        <input type="text" name="ciudad" placeholder="tu ciudad" required>
+        <!--required te dará aviso para que rellenes el campo-->
+        <input id="enviar" type="button" name="">
+    </form>
+    <!--Dentro de p se mostrará lo que le hemos dicho a la funcion de abajo hecha con ajax jquery-->
+    <p id="p1"></p>
+
+    <!--METODO POST-->
+
+    <form method="post" action="">
+        Indique su nombre de usuario:
+        <input type="text" name="usuario">
+        <br>
+        Indique su contraseña:
+        <input type="password" name="password">
+        <input id="envio2" type="button" name="">
+    </form>
+
+    <p id="p2"></p>
+    
+
+
+        <!--Link jquery-->
+        <script type="text/javascript" src="jquery.min.js"></script>
+
+
+        <script>
+            $("#enviar").click(function(){
+                n = $("input[name='nombre']").val();
+                c = $("input[name='ciudad']").val();
+        $.get("index2.php?nombre="+n+"&ciudad="+c, function(data, status){
+            $("#p1").html(data);
+        });
+        });
+        </script>
+
+        <script>
+            $("#envio2").click(function(){
+        $.post("index3.php",
+        {
+            usuario: $("input[name='usuario']").val(),
+            password: $("input[name='password']").val()
+        },
+        function(data, status){
+            $("#p2").html(data);
+        });
+        });
+        </script>
+
+</body>
+</html>
